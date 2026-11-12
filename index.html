@@ -10,26 +10,17 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>NUQTH - الدخول</title>
-    <meta name="robots" content="noindex, nofollow">
-    <meta name="referrer" content="no-referrer">
-    <meta name="theme-color" content="#d4af37">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; manifest-src 'self'; worker-src 'self'; connect-src https://ofylogxewabdiemaifep.supabase.co wss://ofylogxewabdiemaifep.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
-
-    <!-- PWA -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="NUQTH">
+    <title>K Loyalty - الإدارة العامة</title>
 
     <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- الخط -->
+    <!-- QR -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+
+    <!-- Font -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap"
         rel="stylesheet"
     >
 
@@ -39,1120 +30,2277 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Tajawal', sans-serif;
+            font-family: 'Tajawal', Arial, sans-serif;
         }
 
         body {
-
             background: #0b0b0b;
-
             color: white;
-
             min-height: 100vh;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
             padding: 20px;
-
         }
 
-        .box {
-
+        .container {
             width: 100%;
+            max-width: 1000px;
+            margin: auto;
+        }
 
-            max-width: 400px;
+        /* =========================
+           الهيدر
+        ========================= */
 
+        .header {
             background: #151515;
-
-            border: 1px solid #d4af37;
-
+            border: 1px solid #292929;
             border-radius: 20px;
-
-            padding: 30px;
-
-            text-align: center;
-
-            box-shadow:
-                0 10px 30px
-                rgba(0, 0, 0, .5);
-
+            padding: 20px 25px;
+            margin-bottom: 20px;
         }
 
-        .title {
-
+        .logo {
             color: #d4af37;
-
             font-size: 28px;
-
             font-weight: 800;
-
-            margin-bottom: 8px;
-
         }
 
-        .sub {
-
+        .subtitle {
             color: #888;
-
             font-size: 14px;
-
-            margin-bottom: 25px;
-
+            margin-top: 2px;
         }
 
-        .saved-project {
+        /* =========================
+           إضافة مشروع
+        ========================= */
 
-            background: #202020;
-
-            border: 1px solid #333;
-
-            border-radius: 12px;
-
-            padding: 15px;
-
-            margin-bottom: 15px;
-
-            color: #ddd;
-
-            font-size: 14px;
-
+        .add-box {
+            background: #151515;
+            border: 1px solid #292929;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 20px;
         }
 
-        .saved-project strong {
-
+        .add-title {
             color: #d4af37;
-
-            display: block;
-
-            margin-top: 5px;
-
-            font-size: 17px;
-
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
         }
 
-        input {
+        .inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
 
+        input,
+        select {
             width: 100%;
-
-            padding: 14px;
-
+            padding: 13px;
             background: #202020;
-
             color: white;
-
             border: 1px solid #333;
-
-            border-radius: 12px;
-
-            font-size: 18px;
-
-            text-align: center;
-
+            border-radius: 10px;
             outline: none;
-
-            margin-bottom: 15px;
-
+            font-size: 15px;
         }
 
         input:focus {
-
             border-color: #d4af37;
-
         }
 
-        button {
-
+        .add-button {
             width: 100%;
-
             padding: 13px;
-
+            margin-top: 12px;
             background: #d4af37;
-
             color: #111;
-
             border: none;
-
-            border-radius: 12px;
-
-            font-size: 16px;
-
+            border-radius: 10px;
             font-weight: bold;
-
+            font-size: 16px;
             cursor: pointer;
-
-            margin-bottom: 10px;
-
         }
 
-        button:hover {
-
-            background: #f0c542;
-
-        }
-
-        button:disabled {
-
+        .add-button:disabled {
             opacity: .6;
-
             cursor: not-allowed;
-
         }
 
-        .change-button {
-
-            background: #333;
-
-            color: white;
-
-        }
-
-        .change-button:hover {
-
-            background: #444;
-
-        }
-
-        .error {
-
-            color: #ff7777;
-
-            margin-top: 15px;
-
-            font-size: 14px;
-
+        .message {
+            text-align: center;
+            margin-top: 10px;
             min-height: 20px;
+        }
 
+        /* =========================
+           الإحصائيات
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            background: #151515;
+            border: 1px solid #292929;
+            border-radius: 16px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .stat-title {
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .total-number {
+            color: #d4af37;
+        }
+
+        .active-number {
+            color: #76e39b;
+        }
+
+        .inactive-number {
+            color: #ff7777;
+        }
+
+        /* =========================
+           المشاريع
+        ========================= */
+
+        .projects-box {
+            background: #151515;
+            border: 1px solid #292929;
+            border-radius: 18px;
+            padding: 20px;
+        }.projects-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .projects-title {
+            color: #d4af37;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .search {
+            max-width: 300px;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .project {
+            background: #202020;
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .project:hover {
+            border-color: #d4af37;
+            transform: translateY(-3px);
+        }
+
+        .project-name {
+            color: #d4af37;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .project-code {
+            color: #aaa;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .project-phone {
+            color: #777;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .active {
+            color: #76e39b;
+            background: #183322;
+        }
+
+        .inactive {
+            color: #ff7777;
+            background: #351919;
+        }
+
+        .empty,
+        .loading {
+            text-align: center;
+            color: #888;
+            padding: 30px;
+            grid-column: 1 / -1;
         }
 
         .loading {
-
             color: #d4af37;
-
         }
 
-        .admin-link {
+        /* =========================
+           التفاصيل
+        ========================= */
 
+        .details {
+            display: none;
+            background: #151515;
+            border: 1px solid #d4af37;
+            border-radius: 18px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .details.show {
             display: block;
-
-            margin-top: 18px;
-
-            color: #8a8a8a;
-
-            font-size: 12px;
-
-            text-decoration: none;
-
-            text-align: center;
-
         }
 
-        .admin-link:hover {
+        .details-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
+        .details-name {
             color: #d4af37;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .close-button {
+            padding: 10px 18px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+        }
+
+        .info {
+            background: #202020;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #888;
+        }
+
+        .info-value {
+            color: white;
+            font-weight: bold;
+        }
+
+        .subscription-box {
+            background: #202020;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .subscription-title {
+            color: #d4af37;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .subscription-fields {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .subscription-fields label {
+            display: block;
+            color: #aaa;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .subscription-message {
+            min-height: 20px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .logout-button {
+            padding: 8px 13px;
+            background: #333;
+            color: white;
+            border: 1px solid #444;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        /* =========================
+           الرموز
+        ========================= */
+
+        .codes-title {
+            color: #aaa;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .codes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .code-box {
+            background: #202020;
+            border: 1px solid #333;
+            border-radius: 14px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .code-box.client {
+            border-color: #76e39b;
+        }
+
+        .code-box.cashier {
+            border-color: #d4af37;
+        }
+
+        .code-box.admin {
+            border-color: #b79cff;
+        }.code-title {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .client-color {
+            color: #76e39b;
+        }
+
+        .cashier-color {
+            color: #d4af37;
+        }
+
+        .admin-color {
+            color: #b79cff;
+        }
+
+        .code-value {
+            background: #111;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            direction: ltr;
+            margin-bottom: 10px;
+        }
+
+        .copy-button {
+            width: 100%;
+            padding: 10px;
+            background: #444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* =========================
+           QR العميل فقط
+        ========================= */
+
+        .qr-section {
+            background: #202020;
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .qr-title {
+            color: #76e39b;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .qr {
+            width: 210px;
+            height: 210px;
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr img {
+            width: 190px;
+            height: 190px;
+        }
+
+        .qr-link {
+            background: #111;
+            color: #aaa;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            direction: ltr;
+            word-break: break-all;
+            margin: 15px 0;
+        }
+
+        .qr-button {
+            width: 100%;
+            padding: 11px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        /* =========================
+           تشغيل / إيقاف
+        ========================= */
+
+        .status-button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .stop-button {
+            background: #8b2d2d;
+            color: white;
+        }
+
+        .start-button {
+            background: #287a43;
+            color: white;
+        }
+
+        .delete-button {
+            background: #7a1f1f;
+            color: #ffb3b3;
+            border: 1px solid #a33;
+            margin-bottom: 0;
+        }
+
+        .delete-button:hover {
+            background: #932626;
+        }
+
+        /* =========================
+           الموبايل
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .inputs {
+                grid-template-columns: 1fr;
+            }
+
+            .projects {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .codes {
+                grid-template-columns: 1fr;
+            }
+
+            .subscription-fields {
+                grid-template-columns: 1fr 1fr;
+            }
 
         }
 
-        .hidden {
+        @media (max-width: 550px) {
 
-            display: none !important;
+            body {
+                padding: 10px;
+            }
 
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .subscription-fields {
+                grid-template-columns: 1fr;
+            }
+
+            .search {
+                max-width: none;
+            }
+
+            .details-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+
+            .close-button {
+                width: 100%;
+            }
+
+        }
+
+        /* =========================
+           نافذة تأكيد الحذف
+        ========================= */
+
+        .delete-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.85);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .delete-modal.show {
+            display: flex;
+        }
+
+        .delete-modal-box {
+            background: #151515;
+            border: 1px solid #a33;
+            border-radius: 18px;
+            padding: 28px 22px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+        }
+
+        .delete-modal-title {
+            color: #ff5555;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .delete-modal-text {
+            color: #ccc;
+            font-size: 14px;
+            line-height: 2;
+            margin-bottom: 16px;
+        }
+
+        .delete-required-name {
+            background: #202020;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 10px 14px;
+            color: #d4af37;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+            direction: ltr;
+            text-align: center;
+        }
+
+        .delete-modal-box input {
+            width: 100%;
+            padding: 14px;
+            background: #202020;
+            color: white;
+            border: 1px solid #333;
+            border-radius: 10px;
+            outline: none;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .delete-modal-box input:focus {
+            border-color: #a33;
+        }
+
+        .delete-error {
+            color: #ff7777;
+            font-size: 13px;
+            min-height: 20px;
+            margin-bottom: 10px;
+        }
+
+        .confirm-delete-button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #a33;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+
+        .confirm-delete-button:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+        .cancel-delete-button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #333;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        #adminPanel {
+            display: none;
+        }
+
+        .admin-access {
+            max-width: 420px;
+            margin: 15vh auto 0;
+            padding: 24px;
+            background: #151515;
+            border: 1px solid #d4af37;
+            border-radius: 18px;
+            text-align: center;
+        }
+
+        .admin-access h1 {
+            color: #d4af37;
+            margin-bottom: 12px;
+        }
+
+        .admin-access input {
+            margin: 12px 0;
+            text-align: center;
+        }
+
+        .admin-access button {
+            width: 100%;
+            padding: 13px;
+            background: #d4af37;
+            color: #111;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .admin-access-error {
+            color: #ff7777;
+            min-height: 20px;
+            margin-top: 10px;
         }
 
     </style>
 
 </head>
 
-
 <body>
 
+<form id="adminAccessForm" class="admin-access">
+    <h1>الإدارة العامة</h1>
+    <label for="adminAccessCode">أدخل رمز الإدارة</label>
+    <input id="adminAccessCode" type="password" inputmode="numeric" autocomplete="current-password" required>
+    <button type="submit">دخول</button>
+    <p id="adminAccessError" class="admin-access-error" role="alert"></p>
+</form>
 
-<div class="box">
+<!-- =========================
+     لوحة الإدارة مباشرة
+========================= -->
+
+<main
+    id="adminPanel"
+    class="container"
+>
 
 
-    <div class="title">
-        <span dir="ltr">NUQTH<span aria-hidden="true" style="font-size:.5em;vertical-align:middle;">·</span></span>
+    <!-- الهيدر -->
+
+    <div class="header">
+
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+            <div>
+
+                <div class="logo">
+                    K Loyalty
+                </div><div class="subtitle">
+                    الإدارة العامة للمشاريع
+                </div>
+
+            </div>
+            <button id="adminLogoutButton" class="logout-button" type="button">تسجيل خروج</button>
+        </div>
+
     </div>
 
 
-    <div
-        id="subtitle"
-        class="sub"
-    >
-        أدخل رمز الوصول الخاص بك
-    </div>
+    <!-- =========================
+         إضافة مشروع
+    ========================= -->
 
+    <div class="add-box">
 
-    <!-- المشروع المحفوظ -->
+        <div class="add-title">
+            + إضافة مشروع جديد
+        </div>
 
-    <div
-        id="savedProject"
-        class="saved-project hidden"
-    >
+        <div class="inputs">
 
-        المشروع المحفوظ
+            <input
+                id="storeName"
+                type="text"
+                placeholder="اسم المشروع"
+            >
 
-        <strong id="savedProjectName">
-            -
-        </strong>
+            <input
+                id="storeCode"
+                type="text"
+                placeholder="كود المشروع مثل K001"
+            >
 
-    </div>
+            <input
+                id="whatsapp"
+                type="text"
+                placeholder="رقم واتساب"
+            >
 
-
-    <!-- زر الدخول للمشروع المحفوظ -->
-
-    <button
-        id="goToSavedButton"
-        class="hidden"
-        type="button"
-    >
-        الدخول للمشروع
-    </button>
-
-
-    <!-- إدخال الرمز -->
-
-    <div id="codeSection">
-
-        <input
-            type="text"
-            id="accessCode"
-            placeholder="أدخل الرمز هنا"
-            autocomplete="off"
-        >
-
+        </div>
 
         <button
-            id="loginButton"
+            id="addButton"
+            class="add-button"
             type="button"
         >
-            دخول
+            إضافة المشروع
         </button>
+
+        <div
+            id="message"
+            class="message"
+        ></div>
 
     </div>
 
 
-    <!-- تغيير المشروع --><button
-        id="changeProjectButton"
-        class="change-button hidden"
-        type="button"
-    >
-        تغيير المشروع
-    </button>
+    <!-- =========================
+         الإحصائيات
+    ========================= -->
 
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-title">
+                جميع المشاريع
+            </div>
+
+            <div
+                id="total"
+                class="stat-number total-number"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-title">
+                المشاريع النشطة
+            </div>
+
+            <div
+                id="active"
+                class="stat-number active-number"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-title">
+                المشاريع المتوقفة
+            </div>
+
+            <div
+                class="stat-number inactive-number"
+            >
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         المشاريع
+    ========================= -->
+
+    <div class="projects-box">
+
+        <div class="projects-header">
+
+            <div class="projects-title">
+                المشاريع
+            </div>
+
+            <input
+                id="search"
+                class="search"
+                type="search"
+                placeholder="🔎 ابحث عن مشروع..."
+            >
+
+        </div>
+
+        <div
+            id="projects"
+            class="projects"
+        >
+
+            <div class="loading">
+                جاري تحميل المشاريع...
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         تفاصيل المشروع
+    ========================= -->
 
     <div
-        id="errorMsg"
-        class="error"
-    ></div>
-
-
-    <a
-        class="admin-link"
-        href="admin.html"
+        id="details"
+        class="details"
     >
-        الإدارة العامة
-    </a>
+
+        <div class="details-header">
+
+            <div
+                id="detailsName"
+                class="details-name"
+            ></div>
+
+            <button
+                id="closeDetails"
+                class="close-button"
+                type="button"
+            >
+                إغلاق
+            </button>
+
+        </div>
 
 
-</div>
+        <div
+            id="info"
+            class="info"
+        ></div>
 
+        <div class="subscription-box">
+            <div class="subscription-title">بيانات الاشتراك</div>
+            <div class="subscription-fields">
+                <div>
+                    <label for="subscriptionType">نوع الاشتراك</label>
+                    <select id="subscriptionType">
+                        <option value="شهري">شهري</option>
+                        <option value="سنوي">سنوي</option>
+                        <option value="مخصص">مخصص</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="subscriptionStart">تاريخ البداية</label>
+                    <input id="subscriptionStart" type="date">
+                </div>
+                <div>
+                    <label for="subscriptionEnd">تاريخ الانتهاء</label>
+                    <input id="subscriptionEnd" type="date">
+                </div>
+                <div>
+                    <label for="subscriptionAmount">المبلغ المدفوع</label>
+                    <input id="subscriptionAmount" type="number" min="0" step="0.01" value="0">
+                </div>
+            </div>
+            <button id="saveSubscriptionButton" class="add-button" type="button">حفظ بيانات الاشتراك</button>
+            <div id="subscriptionMessage" class="subscription-message" role="status"></div>
+        </div>
+
+        <!-- الرموز -->
+
+        <div class="codes-title">
+            رموز المشروع
+        </div>
+
+        <div
+            id="codes"
+            class="codes"
+        ></div>
+
+
+        <!-- QR العميل فقط -->
+
+        <div class="qr-section">
+
+            <div class="qr-title">
+                👤 QR العميل
+            </div>
+
+            <div
+                id="clientQR"
+                class="qr"
+            ></div>
+
+            <div
+                id="clientLink"
+                class="qr-link"
+            ></div>
+
+            <div
+                id="clientLinkHint"
+                style="
+                color:#ffb84d;
+                font-size:12px;
+                line-height:1.8;
+                margin-bottom:12px;
+                display:none;
+                "
+            ></div>
+
+            <button
+                id="copyClientLink"
+                class="qr-button"
+                type="button"
+            >
+                نسخ رابط العميل
+            </button>
+
+            <button
+                id="downloadQR"
+                class="qr-button"
+                type="button"
+            >
+                حفظ QR العميل
+            </button></div>
+
+
+    </div>
+    </div>
+
+</main>
 
 <script>
 
+    const ADMIN_AUTH_KEY = "k_loyalty_general_authenticated";
+    const SAVED_DEST_KEY = "k_loyalty_saved_dest";
+    const ACCESS_CODE_KEY = "k_loyalty_access_code";
+    let accessCode = localStorage.getItem(ACCESS_CODE_KEY) || "";
 
-// =====================================
-// SUPABASE
-// =====================================
+    const ADMIN_ERRORS = {
+        invalid: "رمز الإدارة غير صحيح",
+        unauthorized: "انتهت الجلسة، أعد إدخال الرمز",
+        not_found: "المشروع غير موجود",
+        exists: "كود المشروع مستخدم مسبقاً",
+        name_mismatch: "الاسم غير مطابق",
+        rate_limited: "محاولات كثيرة، انتظر قليلاً ثم حاول مجدداً"
+    };
 
-const db =
-    window.supabase.createClient(
-
-        "https://ofylogxewabdiemaifep.supabase.co",
-
-        "sb_publishable_UzOHSK-Jk_5KVVu0TEcFxQ_bOjlAgFQ"
-
-    );
-
-
-// =====================================
-// حد محاولات الدخول الخاطئة
-// =====================================
-
-// 5 محاولات خلال 10 دقائق ثم انتظار دقيقة
-const FAIL_KEY = "k_login_fails";
-
-function readFails() {
-    try {
-        const arr = JSON.parse(localStorage.getItem(FAIL_KEY) || "[]");
-        const cut = Date.now() - 600000;
-        return Array.isArray(arr)
-            ? arr.filter(function (x) { return typeof x === "number" && x > cut; })
-            : [];
-    } catch (e) {
-        return [];
+    function adminErrorText(data) {
+        const code = data && data.error ? String(data.error) : "";
+        return ADMIN_ERRORS[code] || "تعذر تنفيذ العملية";
     }
-}
 
-function lockSecondsLeft() {
-    const f = readFails();
-    if (f.length < 5) return 0;
-    const left = Math.ceil((f[f.length - 1] + 60000 - Date.now()) / 1000);
-    return left > 0 ? left : 0;
-}
+    function showAdminPanel() {
+        document.getElementById("adminAccessForm").hidden = true;
+        document.getElementById("adminPanel").style.display = "block";
+        loadStores();
+    }
 
-function recordFail() {
-    const f = readFails();
-    f.push(Date.now());
-    try {
-        localStorage.setItem(FAIL_KEY, JSON.stringify(f.slice(-10)));
-    } catch (e) {}
-}
+    async function verifyAdminCode(code) {
+        const { data, error } = await db.rpc("app_admin_login", { p_code: code });
+        if (error) return null;
+        return !!(data && data.ok === true);
+    }
 
+    document.getElementById("adminAccessForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-let savedDestination = null;
+        const input = document.getElementById("adminAccessCode");
+        const error = document.getElementById("adminAccessError");
+        const submitButton = event.target.querySelector('button[type="submit"]');
+        const code = input.value.trim();
 
+        error.textContent = "";
 
-// =====================================
-// التخزين
-// =====================================
+        if (!code) {
+            error.textContent = "أدخل رمز الإدارة.";
+            return;
+        }
 
-const SAVED_DEST_KEY =
-    "k_loyalty_saved_dest";
+        if (submitButton) submitButton.disabled = true;
 
+        try {
+            const ok = await verifyAdminCode(code);
 
-// رمز الدخول يُحفظ محلياً فقط لأصحاب الكاشير/الإدارة (لا يُرسل للعميل)
-const ACCESS_CODE_KEY =
-    "k_loyalty_access_code";
+            if (ok === null) {
+                error.textContent = "تعذر الاتصال، حاول مجدداً.";
+                return;
+            }
 
+            if (!ok) {
+                error.textContent = "رمز الإدارة غير صحيح";
+                return;
+            }
 
-// =====================================
-// عناصر الصفحة
-// =====================================
+            accessCode = code;
+            localStorage.setItem(ACCESS_CODE_KEY, code);
+            localStorage.setItem(ADMIN_AUTH_KEY, "true");
+            localStorage.setItem(SAVED_DEST_KEY, "admin.html");
+            input.value = "";
+            showAdminPanel();
+        } finally {
+            if (submitButton) submitButton.disabled = false;
+        }
+    });
 
-const accessCode =
-    document.getElementById(
-        "accessCode"
-    );
-
-
-const loginButton =
-    document.getElementById(
-        "loginButton"
-    );
-
-
-const errorMsg =
-    document.getElementById(
-        "errorMsg"
-    );
-
-
-const savedProject =
-    document.getElementById(
-        "savedProject"
-    );
+    const SUPABASE_URL = "https://ofylogxewabdiemaifep.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_UzOHSK-Jk_5KVVu0TEcFxQ_bOjlAgFQ";
+    const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 
-const savedProjectName =
-    document.getElementById(
-        "savedProjectName"
-    );
+    // =====================================
+    // عناصر الصفحة
+    // =====================================
+
+    const storeName =
+        document.getElementById("storeName");
+
+    const storeCode =
+        document.getElementById("storeCode");
+
+    const whatsapp =
+        document.getElementById("whatsapp");
+
+    const addButton =
+        document.getElementById("addButton");
+
+    const message =
+        document.getElementById("message");
+
+    const projects =
+        document.getElementById("projects");
+
+    const search =
+        document.getElementById("search");
+
+    const total =
+        document.getElementById("total");
+
+    const active =
+        document.getElementById("active");
+
+    const inactive =
+        document.querySelector(
+            ".inactive-number"
+        );
+
+    const details =
+        document.getElementById("details");
+
+    const detailsName =
+        document.getElementById("detailsName");
+
+    const info =
+        document.getElementById("info");
+
+    const codes =
+        document.getElementById("codes");
+
+    const clientQR =
+        document.getElementById("clientQR");
+
+    const clientLinkElement =
+        document.getElementById("clientLink");
+
+    const clientLinkHint =
+        document.getElementById("clientLinkHint");
+
+    const copyClientLink =
+        document.getElementById(
+            "copyClientLink"
+        );
+
+    const downloadQR =
+        document.getElementById(
+            "downloadQR"
+        );
+
+    const closeDetails =
+        document.getElementById(
+            "closeDetails"
+        );
+
+    const subscriptionType =
+        document.getElementById("subscriptionType");
+
+    const subscriptionStart =
+        document.getElementById("subscriptionStart");
+
+    const subscriptionEnd =
+        document.getElementById("subscriptionEnd");
+
+    const subscriptionAmount =
+        document.getElementById("subscriptionAmount");
+
+    const saveSubscriptionButton =
+        document.getElementById("saveSubscriptionButton");
+
+    const subscriptionMessage =
+        document.getElementById("subscriptionMessage");
 
 
-const changeProjectButton =
-    document.getElementById(
-        "changeProjectButton"
-    );
+    let stores = [];
+
+    let selectedStore = null;
 
 
-const codeSection =
-    document.getElementById(
-        "codeSection"
-    );
+    // =====================================
+    // نسخ نص (مع بديل يعمل على file://)
+    // =====================================
+
+    function copyText(text) {
+
+        if (
+            navigator.clipboard &&
+            window.isSecureContext
+        ) {
+
+            return navigator.clipboard
+                .writeText(text);
+
+        }
 
 
-const subtitle =
-    document.getElementById(
-        "subtitle"
-    );
+        return new Promise(
+            function (resolve, reject) {
+
+                try {
+
+                    const area =
+                        document.createElement(
+                            "textarea"
+                        );
+
+                    area.value = text;
+
+                    area.style.position =
+                        "fixed";
+
+                    area.style.opacity =
+                        "0";
 
 
-// =====================================
-// إظهار المشروع المحفوظ
-// =====================================
+                    document.body.appendChild(
+                        area
+                    );
 
-async function loadSavedProject() {
+                    area.focus();
 
-    const savedDest =
-        localStorage.getItem(
-            SAVED_DEST_KEY
+                    area.select();
+
+
+                    const ok =
+                        document.execCommand(
+                            "copy"
+                        );
+
+
+                    document.body.removeChild(
+                        area
+                    );
+
+
+                    if (ok) {
+
+                        resolve();
+
+                    } else {
+
+                        reject(
+                            new Error(
+                                "copy failed"
+                            )
+                        );
+
+                    }
+
+                } catch (error) {
+
+                    reject(error);
+
+                }
+
+            }
+        );
+
+    }
+
+
+    // =====================================
+    // توليد رمز عشوائي
+    // =====================================
+
+    function generateCode(prefix) {
+        const number = Math.floor(1000 + Math.random() * 9000);
+        return prefix + number;
+    }
+
+
+    // =====================================
+    // معرفة مجلد المشروع
+    // =====================================
+
+    function getFolder() {
+
+        const url =
+            window.location.href;
+
+        return url.substring(
+            0,
+            url.lastIndexOf("/") + 1
+        );
+
+    }
+
+
+    // =====================================
+    // رابط العميل
+    // =====================================
+
+    function getClientLink(code) {
+
+        return (
+            getFolder() +
+            "client.html?code=" +
+            encodeURIComponent(code)
+        );
+
+    }
+
+
+    // =====================================
+    // تحميل المشاريع
+    // =====================================
+
+    async function loadStores() {
+
+        projects.innerHTML =
+            '<div class="loading">جاري تحميل المشاريع...</div>';
+
+
+        const result = await db.rpc("admin_list", { p_code: accessCode });
+        const data = result.data;
+
+        if (result.error || !data || data.ok !== true) {
+            projects.innerHTML = '<div class="empty">' +
+                (result.error ? result.error.message : adminErrorText(data)) +
+                '</div>';
+            console.error(result.error || data);
+            return;
+        }
+
+        stores = data.stores || [];
+        updateNumbers();
+        showProjects(stores);
+
+    }
+
+
+    // =====================================
+    // الإحصائيات
+    // =====================================
+
+    function updateNumbers() {
+
+        total.textContent =
+            stores.length;
+
+
+        let activeCount = 0;
+
+
+        stores.forEach(
+            function (store) {
+
+                if (
+                    store.is_active === true
+                ) {
+
+                    activeCount++;
+
+                }
+
+            }
         );
 
 
-    if (!savedDest) {
+        active.textContent =
+            activeCount;
 
-        return;
-
-    }
-
-
-    savedDestination =
-        savedDest;
-
-
-    // الإدارة العامة
-
-    if (
-        savedDest === "admin.html"
-    ) {
-
-        window.location.replace(
-            savedDest
-        );
-
-        return;
+        inactive.textContent =
+            stores.length -
+            activeCount;
 
     }
 
 
-    if (
-        !/^(client|cashier|owner)\.html\?project=/.test(savedDest)
-    ) {
+    // =====================================
+    // عرض المشاريع
+    // =====================================
 
-        localStorage.removeItem(
-            SAVED_DEST_KEY
-        );
+    function showProjects(list) {
 
-        return;
-
-    }
+        projects.innerHTML = "";
 
 
-    try {
+        if (list.length === 0) {
 
-        // استخراج كود المشروع من الرابط
-
-        const urlObj =
-            new URL(
-                savedDest,
-                window.location.href
-            );
-
-        const savedCode =
-            urlObj.searchParams.get(
-                "project"
-            ) || "";
-
-
-        if (!savedCode) {
-
-            localStorage.removeItem(
-                SAVED_DEST_KEY
-            );
+            projects.innerHTML =
+                '<div class="empty">' +
+                'لا يوجد مشاريع.' +
+                '</div>';
 
             return;
 
         }
 
 
-        const savedRole =
-            savedDest.indexOf("cashier.html") === 0
-                ? "cashier"
-                : (savedDest.indexOf("owner.html") === 0
-                    ? "admin"
-                    : "client");
+        list.forEach(
+            function (store) {
+
+                createProject(store);
+
+            }
+        );
+
+    }
 
 
-        let result;
+    // =====================================
+    // مربع المشروع
+    // =====================================
+
+    function createProject(store) {
+
+        const box =
+            document.createElement("div");
+
+        box.className =
+            "project";
 
 
-        if (savedRole === "client") {
+        const name =
+            document.createElement("div");
 
-            // صفحة العميل تعمل بكود المشروع العام فقط
-            const rpcResult =
-                await db.rpc(
-                    "client_store",
-                    { p_store_code: savedCode }
-                );
+        name.className =
+            "project-name";
 
+        name.textContent =
+            store.store_name ||
+            "بدون اسم";
 
-            const store =
-                (rpcResult.data && rpcResult.data.ok)
-                    ? rpcResult.data.store
-                    : null;
+        box.appendChild(name);
 
 
-            result = {
-                data: store
-                    ? {
-                        store_code: store.store_code,
-                        store_name: store.store_name,
-                        is_active: store.is_active
-                    }
-                    : null,
-                error: rpcResult.error || null
+        const code =
+            document.createElement("div");
+
+        code.className =
+            "project-code";
+
+        code.textContent =
+            "الكود: " +
+            (store.store_code || "-");
+
+        box.appendChild(code);
+
+
+        const phone =
+            document.createElement("div");
+
+        phone.className =
+            "project-phone";
+
+        phone.textContent =
+            "واتساب: " +
+            (store.whatsapp_num || "-");
+
+        box.appendChild(phone);
+
+
+        const status =
+            document.createElement("span");
+
+        status.className =
+            "status " +
+            (
+                store.is_active
+                    ? "active"
+                    : "inactive"
+            );
+
+        status.textContent =
+            store.is_active
+                ? "● شغال"
+                : "● متوقف";
+
+        box.appendChild(status);
+
+
+        box.onclick =
+            function () {
+
+                openDetails(store);
+
             };
+
+
+        projects.appendChild(box);
+
+    }
+
+
+    // =====================================
+    // فتح تفاصيل المشروع
+    // =====================================
+
+    function openDetails(store) {
+
+        selectedStore =
+            store;
+
+
+        details.classList.add(
+            "show"
+        );
+
+
+        detailsName.textContent =
+            store.store_name ||
+            "بدون اسم";
+
+
+        info.innerHTML = "";
+
+
+        addInfo(
+            "كود المشروع",
+            store.store_code || "-"
+        );
+
+
+        addInfo(
+            "واتساب",
+            store.whatsapp_num || "-"
+        );
+
+
+        addInfo(
+            "الحالة",
+            store.is_active
+                ? "🟢 المشروع شغال"
+                : "🔴 المشروع متوقف"
+        );
+
+        subscriptionType.value =
+            store.subscription_type || "شهري";
+
+        subscriptionStart.value =
+            store.subscription_start || "";
+
+        subscriptionEnd.value =
+            store.subscription_end || "";
+
+        subscriptionAmount.value =
+            store.subscription_amount == null
+                ? "0"
+                : store.subscription_amount;
+
+        subscriptionMessage.textContent = "";
+
+
+        // =====================================
+        // الرموز
+        // =====================================
+
+        codes.innerHTML = "";
+
+
+        createCodeBox(
+            "👤 العميل",
+            "client",
+            "client-color",
+            store.code_client
+        );
+
+
+        createCodeBox(
+            "💰 الكاشير",
+            "cashier",
+            "cashier-color",
+            store.code_cashier
+        );
+
+
+        createCodeBox(
+            "🏢 إدارة المشروع",
+            "admin",
+            "admin-color",
+            store.code_admin
+        );// =====================================
+        // QR العميل فقط
+        // =====================================
+
+        const link =
+            getClientLink(
+                store.code_client
+            );
+
+
+        clientLinkElement.textContent =
+            link;
+
+
+        // تنبيه: رابط file:// لا يعمل على هواتف العملاء
+
+        if (
+            link.indexOf("file:") === 0
+        ) {
+
+            clientLinkHint.textContent =
+                "⚠️ أنت تفتح الإدارة من ملف محلي، لذلك الباركود يحتوي رابط file:// يعمل على هذا الجهاز فقط. ارفع الملفات على استضافة/رابط عام ليعمل على هواتف العملاء.";
+
+            clientLinkHint.style.display =
+                "block";
 
         } else {
 
-            // الكاشير والإدارة يحتاجان رمزاً سرياً محفوظاً من تسجيل الدخول
-            const accessCode =
-                localStorage.getItem(
-                    ACCESS_CODE_KEY
-                );
+            clientLinkHint.style.display =
+                "none";
+
+        }
 
 
-            if (!accessCode) {
-
-                localStorage.removeItem(
-                    SAVED_DEST_KEY
-                );
-
-                return;
-
-            }
+        createQR(
+            clientQR,
+            link
+        );
 
 
-            const rpcResult =
-                await db.rpc(
-                    "app_login",
-                    { p_code: accessCode }
-                );
+        details.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
 
 
-            const auth =
-                rpcResult.data || {};
+    // =====================================
+    // إضافة معلومة
+    // =====================================
+
+    function addInfo(
+        label,
+        value
+    ) {
+
+        const row =
+            document.createElement(
+                "div"
+            );
+
+        row.className =
+            "info-row";
 
 
-            const valid =
-                auth.ok === true &&
-                auth.role === savedRole &&
-                auth.store_code === savedCode;
+        const labelElement =
+            document.createElement(
+                "span"
+            );
+
+        labelElement.className =
+            "info-label";
+
+        labelElement.textContent =
+            label;
 
 
-            result = {
-                data: valid
-                    ? {
-                        store_code: auth.store_code,
-                        store_name: auth.store_name,
-                        is_active: true
-                    }
-                    : null,
-                error: rpcResult.error || null
+        const valueElement =
+            document.createElement(
+                "span"
+            );
+
+        valueElement.className =
+            "info-value";
+
+        valueElement.textContent =
+            value;
+
+
+        row.appendChild(
+            labelElement
+        );
+
+        row.appendChild(
+            valueElement
+        );
+
+
+        info.appendChild(row);
+
+    }
+
+
+    // =====================================
+    // مربع الرمز
+    // =====================================
+
+    function createCodeBox(
+        title,
+        type,
+        colorClass,
+        value
+    ) {
+
+        const box =
+            document.createElement(
+                "div"
+            );
+
+        box.className =
+            "code-box " +
+            type;
+
+
+        const titleElement =
+            document.createElement(
+                "div"
+            );
+
+        titleElement.className =
+            "code-title " +
+            colorClass;
+
+        titleElement.textContent =
+            title;
+
+
+        const valueElement =
+            document.createElement(
+                "div"
+            );
+
+        valueElement.className =
+            "code-value";
+
+        valueElement.textContent =
+            value || "-";
+
+
+        const copy =
+            document.createElement(
+                "button"
+            );
+
+        copy.className =
+            "copy-button";
+
+        copy.textContent =
+            "نسخ الرمز";
+
+
+        copy.onclick =
+            function () {
+
+                if (!value) return;
+
+
+                copyText(value)
+                    .then(
+                        function () {
+
+                            copy.textContent =
+                                "تم النسخ ✅";
+
+
+                            setTimeout(
+                                function () {
+
+                                    copy.textContent =
+                                        "نسخ الرمز";
+
+                                },
+                                1500
+                            );
+
+                        }
+                    )
+                    .catch(
+                        function () {
+
+                            copy.textContent =
+                                "تعذر النسخ";
+
+                        }
+                    );
+
             };
 
-        }
 
-
-        if (result.error) {
-
-            throw result.error;
-
-        }
-
-
-        if (!result.data) {
-
-            localStorage.removeItem(
-                SAVED_DEST_KEY
-            );
-
-            return;
-
-        }
-
-
-        const store =
-            result.data;
-
-
-        // المشروع متوقف
-
-        if (
-            store.is_active !== true
-        ) {
-
-            localStorage.removeItem(
-                SAVED_DEST_KEY
-            );
-
-            errorMsg.textContent =
-                "المشروع المحفوظ متوقف حالياً.";
-
-            return;
-
-        }
-
-
-        window.location.replace(
-            savedDest
+        box.appendChild(
+            titleElement
         );
 
-    } catch (error) {
-
-        console.error(
-            "Saved project validation error:",
-            error
+        box.appendChild(
+            valueElement
         );
 
-        errorMsg.textContent =
-            "تعذر التحقق من المشروع المحفوظ. تحقق من اتصال الإنترنت وحاول مجدداً.";
-
-    }
-
-}
+        box.appendChild(
+            copy
+        );
 
 
-// =====================================
-// الدخول
-// =====================================
-
-async function login() {
-
-    const code =
-        accessCode.value.trim();
-
-
-    errorMsg.textContent = "";
-
-
-    if (!code) {
-
-        errorMsg.textContent =
-            "يرجى إدخال الرمز أولاً";
-
-        return;
+        codes.appendChild(box);
 
     }
 
 
-    // =================================
-    // حد محاولات الدخول الخاطئة
-    // =================================
+    // =====================================
+    // إنشاء QR
+    // =====================================
 
-    const waitSec = lockSecondsLeft();
+    function createQR(
+        container,
+        link
+    ) {
 
-    if (waitSec > 0) {
+        try {
 
-        errorMsg.textContent =
-            "محاولات خاطئة كثيرة. حاول بعد " + waitSec + " ثانية.";
+            // typeNumber = 0 تعني اختيار الحجم تلقائياً
+            // حتى لا يفشل الرابط الطويل (مثل مسار file://)
 
-        return;
-
-    }
-
-
-    // ملاحظة: رمز الإدارة العامة لم يعد يُتحقق منه هنا.
-    // الإدارة العامة تُفتح مباشرة من admin.html ويُطلب الرمز هناك.
-    loginButton.disabled =
-        true;
-
-
-    loginButton.textContent =
-        "جاري التحقق...";
-
-
-    try {
-
-
-        // =================================
-        // 1 - الكاشير
-        // =================================
-
-        const loginResult =
-            await db.rpc(
-                "app_login",
-                { p_code: code }
-            );
-
-
-        if (loginResult.error) {
-
-            throw loginResult.error;
-
-        }
-
-
-        const auth =
-            loginResult.data || {};
-
-
-        if (auth.ok !== true) {
-
-            if (auth.error === "too_many") {
-
-                errorMsg.textContent =
-                    "محاولات كثيرة. حاول بعد قليل.";
-
-                return;
-
-            }
-
-
-            if (auth.error === "inactive") {
-
-                errorMsg.textContent =
-                    "هذا المشروع متوقف حالياً.";
-
-                return;
-
-            }
-
-        }
-
-
-        const cashierResult = {
-            data: (auth.ok === true && auth.role === "cashier")
-                ? {
-                    id: 0,
-                    store_code: auth.store_code,
-                    is_active: true
-                }
-                : null,
-            error: null
-        };
-
-
-        if (cashierResult.data) {
-
-            const store =
-                cashierResult.data;
-
-
-            if (
-                store.is_active !== true
-            ) {
-
-                errorMsg.textContent =
-                    "هذا المشروع متوقف حالياً.";
-
-                return;
-
-            }
-
-
-            // نحفظ رمز الكاشير سرياً لاستخدامه في طلبات السيرفر
-            localStorage.setItem(
-                ACCESS_CODE_KEY,
-                code
-            );
-
-
-            window.location.href =
-                "cashier.html?project=" +
-                encodeURIComponent(
-                    store.store_code
+            const qr =
+                qrcode(
+                    0,
+                    "M"
                 );
 
-            localStorage.setItem(
-                SAVED_DEST_KEY,
-                "cashier.html?project=" +
-                encodeURIComponent(
-                    store.store_code
+
+            qr.addData(link);
+
+            qr.make();
+
+
+            container.innerHTML =
+                qr.createImgTag(
+                    5,
+                    5
+                );
+
+        } catch (error) {
+
+            container.textContent =
+                "تعذر إنشاء QR";
+
+            console.error(error);
+
+        }
+
+    }
+
+
+    // =====================================
+    // نسخ رابط العميل
+    // =====================================
+
+    copyClientLink.onclick =
+        function () {
+
+            const link =
+                clientLinkElement.textContent;
+
+
+            copyText(link)
+                .then(
+                    function () {
+
+                        copyClientLink.textContent =
+                            "تم النسخ ✅";
+
+
+                        setTimeout(
+                            function () {
+
+                                copyClientLink.textContent =
+                                    "نسخ رابط العميل";
+
+                            },
+                            1500
+                        );
+
+                    }
                 )
-            );
+                .catch(
+                    function () {
 
+                        copyClientLink.textContent =
+                            "تعذر النسخ، انسخ الرابط يدوياً";
 
-            return;
+                    }
+                );
 
-        }
-
-
-        // =================================
-        // 2 - إدارة المشروع
-        // =================================
-
-        const adminResult = {
-            data: (auth.ok === true && auth.role === "admin")
-                ? {
-                    id: 0,
-                    store_code: auth.store_code,
-                    is_active: true
-                }
-                : null,
-            error: null
         };
 
 
-        if (adminResult.data) {
+    // =====================================
+    // حفظ QR
+    // =====================================
 
-            const store =
-                adminResult.data;
+    downloadQR.onclick =
+        function () {
+
+            const image =
+                clientQR.querySelector(
+                    "img"
+                );
 
 
-            if (
-                store.is_active !== true
-            ) {
+            if (!image) {
 
-                errorMsg.textContent =
-                    "هذا المشروع متوقف حالياً.";
+                alert(
+                    "الـ QR غير جاهز."
+                );
 
                 return;
 
             }
 
 
-            // نحفظ رمز الإدارة سرياً لاستخدامه في طلبات السيرفر
-            localStorage.setItem(
-                ACCESS_CODE_KEY,
-                code
-            );
-
-
-            window.location.href =
-                "owner.html?project=" +
-                encodeURIComponent(
-                    store.store_code
-                );
-
-            localStorage.setItem(
-                SAVED_DEST_KEY,
-                "owner.html?project=" +
-                encodeURIComponent(
-                    store.store_code
-                )
-            );
-
-
-            return;
-
-        }
-
-
-        // =================================
-        // 3 - العميل
-        // =================================
-
-        const clientResult = {
-            data: (auth.ok === true && auth.role === "client")
-                ? {
-                    id: 0,
-                    store_code: auth.store_code,
-                    store_name: auth.store_name,
-                    is_active: true
-                }
-                : null,
-            error: null
-        };
-
-
-        if (clientResult.data) {
-
-            const store =
-                clientResult.data;
-
-
             if (
-                store.is_active !== true
+                !image.complete ||
+                !image.naturalWidth
             ) {
 
-                errorMsg.textContent =
-                    "هذا المشروع متوقف حالياً.";
+                alert(
+                    "انتظر لحظة حتى يجهز الـ QR ثم أعد المحاولة."
+                );
 
                 return;
 
             }
 
 
-            // =================================
-            // حفظ المشروع على الجهاز
-            // =================================
-
-            const destURL =
-                "client.html?project=" +
-                encodeURIComponent(
-                    store.store_code
+            const a =
+                document.createElement(
+                    "a"
                 );
 
-            localStorage.removeItem(
-                ACCESS_CODE_KEY
+
+            // تحويل الصورة إلى PNG حقيقي بدل صيغة GIF
+
+            const canvas =
+                document.createElement(
+                    "canvas"
+                );
+
+            canvas.width =
+                image.naturalWidth ||
+                300;
+
+            canvas.height =
+                image.naturalHeight ||
+                300;
+
+            canvas
+                .getContext("2d")
+                .drawImage(
+                    image,
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                );
+
+
+            a.href =
+                canvas.toDataURL(
+                    "image/png"
+                );
+
+
+            a.download =
+                (
+                    selectedStore.store_name ||
+                    "client"
+                ) +
+                "-QR.png";
+
+
+            document.body.appendChild(
+                a
             );
 
+            a.click();
 
-            localStorage.setItem(
-                SAVED_DEST_KEY,
-                destURL
+            document.body.removeChild(
+                a
             );
 
-
-            // فتح صفحة العميل
-            // نرسل store_code وليس code_client
-
-            window.location.href =
-                destURL;
+        };
 
 
-            return;
+    // =====================================
+    // إغلاق التفاصيل
+    // =====================================
 
-        }
+    closeDetails.onclick =
+        function () {
+
+            details.classList.remove(
+                "show"
+            );
+
+            selectedStore =
+                null;
+
+        };
+
+    saveSubscriptionButton.onclick =
+        async function () {
+            if (!selectedStore) return;
+
+            const amount = Number(subscriptionAmount.value);
+            const startDate = subscriptionStart.value;
+            const endDate = subscriptionEnd.value;
+
+            subscriptionMessage.style.color = "#ff7777";
+            subscriptionMessage.textContent = "";
+
+            if (!Number.isFinite(amount) || amount < 0) {
+                subscriptionMessage.textContent = "أدخل مبلغاً صحيحاً غير سالب.";
+                return;
+            }
+
+            if (startDate && endDate && startDate > endDate) {
+                subscriptionMessage.textContent = "تاريخ الانتهاء يجب أن يكون بعد تاريخ البداية.";
+                return;
+            }
+
+            saveSubscriptionButton.disabled = true;
+            saveSubscriptionButton.textContent = "جاري الحفظ...";
+
+            try {
+                const result = await db.rpc("admin_update_subscription", {
+                    p_code: accessCode,
+                    p_store_id: selectedStore.id,
+                    p_type: subscriptionType.value,
+                    p_start: startDate || null,
+                    p_end: endDate || null,
+                    p_amount: amount
+                });
+
+                if (result.error) throw result.error;
+                if (!result.data || result.data.ok !== true) {
+                    throw new Error(adminErrorText(result.data));
+                }
+
+                const selectedId = selectedStore.id;
+                await loadStores();
+                const updatedStore = stores.find(function (store) {
+                    return store.id === selectedId;
+                });
+
+                if (updatedStore) openDetails(updatedStore);
+                subscriptionMessage.style.color = "#76e39b";
+                subscriptionMessage.textContent = "تم حفظ بيانات الاشتراك بنجاح.";
+            } catch (error) {
+                console.error("Subscription save error:", error);
+                subscriptionMessage.style.color = "#ff7777";
+                subscriptionMessage.textContent =
+                    "تعذر حفظ بيانات الاشتراك: " + error.message;
+            } finally {
+                saveSubscriptionButton.disabled = false;
+                saveSubscriptionButton.textContent = "حفظ بيانات الاشتراك";
+            }
+        };
 
 
-        // =================================
-        // الرمز غير موجود
-        // =================================
+    // =====================================
+    // إضافة مشروع
+    // =====================================
 
-        recordFail();
+    addButton.onclick =
+        async function () {
 
+            const name =
+                storeName.value.trim();
 
-        errorMsg.textContent =
-            "الرمز المدخل غير صحيح.";
+            const code =
+                storeCode.value.trim();
 
-
-    } catch (error) {
-
-        console.error(
-            "Login Error:",
-            error
-        );
+            const phone =
+                whatsapp.value.trim();
 
 
-        errorMsg.textContent =
-            "حدث خطأ أثناء التحقق من الرمز.";
+            message.textContent =
+                "";
 
-    } finally {
 
-        loginButton.disabled =
-            false;
+            if (!name || !code) {
 
-        loginButton.textContent =
-            "دخول";
+                message.style.color =
+                    "#ff7777";
 
+                message.textContent =
+                    "اكتب اسم المشروع وكود المشروع.";
+
+                return;
+
+            }
+
+
+            addButton.disabled =
+                true;
+
+            addButton.textContent =
+                "جاري الإضافة...";
+
+
+            try {
+
+                const result = await db.rpc("admin_create_store", {
+                    p_code: accessCode,
+                    p_store_code: code,
+                    p_store_name: name,
+                    p_whatsapp: phone,
+                    p_code_client: generateCode("CL"),
+                    p_code_cashier: generateCode("CA"),
+                    p_code_admin: generateCode("AD")
+                });
+
+                if (result.error) throw result.error;
+
+                if (!result.data || result.data.ok !== true) {
+                    message.style.color = "#ff7777";
+                    message.textContent = adminErrorText(result.data);
+                    return;
+                }
+
+
+                message.style.color =
+                    "#76e39b";
+
+                message.textContent =
+                    "تم إضافة المشروع وتوليد الرموز بنجاح ✅";
+
+
+                storeName.value =
+                    "";
+
+                storeCode.value =
+                    "";
+
+                whatsapp.value =
+                    "";
+
+
+                await loadStores();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.style.color =
+                    "#ff7777";
+
+                message.textContent =
+                    "حدث خطأ: " +
+                    error.message;
+
+            } finally {
+
+                addButton.disabled =
+                    false;
+
+                addButton.textContent =
+                    "إضافة المشروع";
+
+            }
+
+        };
+
+
+    // =====================================
+    // البحث
+    // =====================================
+
+    search.oninput =
+        function () {const text =
+                search.value
+                    .trim()
+                    .toLowerCase();
+
+
+            if (!text) {
+
+                showProjects(
+                    stores
+                );
+
+                return;
+
+            }
+
+
+            const filtered =
+                stores.filter(
+                    function (store) {
+
+                        const name =
+                            (
+                                store.store_name ||
+                                ""
+                            ).toLowerCase();
+
+
+                        const code =
+                            (
+                                store.store_code ||
+                                ""
+                            ).toLowerCase();
+
+
+                        return (
+                            name.includes(text) ||
+                            code.includes(text)
+                        );
+
+                    }
+                );
+
+
+            showProjects(
+                filtered
+            );
+
+        };
+
+    document.getElementById("adminLogoutButton").onclick =
+        function () {
+            localStorage.removeItem(ADMIN_AUTH_KEY);
+            localStorage.removeItem(SAVED_DEST_KEY);
+            localStorage.removeItem(ACCESS_CODE_KEY);
+            sessionStorage.removeItem("k_general_login");
+            accessCode = "";
+            window.location.href = "index.html";
+        };
+
+    if (localStorage.getItem(ADMIN_AUTH_KEY) === "true") {
+        (async function () {
+            const ok = accessCode ? await verifyAdminCode(accessCode) : false;
+
+            if (ok === true) {
+                showAdminPanel();
+            } else {
+                localStorage.removeItem(ADMIN_AUTH_KEY);
+                localStorage.removeItem(ACCESS_CODE_KEY);
+                accessCode = "";
+            }
+        })();
     }
 
-}// =====================================
-// تغيير المشروع
-// =====================================
-
-changeProjectButton.onclick =
-    function() {
-
-        localStorage.removeItem(
-            SAVED_DEST_KEY
-        );
-
-        localStorage.removeItem(
-            ACCESS_CODE_KEY
-        );
-
-        savedDestination =
-            null;
-
-
-        savedProject.classList.add(
-            "hidden"
-        );
-
-
-        changeProjectButton.classList.add(
-            "hidden"
-        );
-
-
-        document.getElementById(
-            "goToSavedButton"
-        ).classList.add(
-            "hidden"
-        );
-
-
-        codeSection.classList.remove(
-            "hidden"
-        );
-
-
-        subtitle.textContent =
-            "أدخل رمز المشروع الجديد";
-
-
-        accessCode.value =
-            "";
-
-
-        errorMsg.textContent =
-            "";
-
-
-        accessCode.focus();
-
-    };
-
-
-// =====================================
-// زر الدخول للمشروع المحفوظ
-// =====================================
-
-document.getElementById(
-    "goToSavedButton"
-).onclick =
-    function() {
-
-        if (savedDestination) {
-
-            window.location.href =
-                savedDestination;
-
-        }
-
-    };
-
-
-// =====================================
-// زر الدخول
-// =====================================
-
-loginButton.onclick =
-    login;
-
-
-// =====================================
-// Enter
-// =====================================
-
-accessCode.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.key === "Enter"
-        ) {
-
-            login();
-
-        }
-
-    }
-);
-
-
-// =====================================
-// تشغيل الصفحة
-// =====================================
-
-loadSavedProject();
-
-
-// =====================================
-// Service Worker (PWA + أوفلاين)
-// =====================================
-
-if ("serviceWorker" in navigator) {
-
-    window.addEventListener("load", function() {
-
-        navigator.serviceWorker
-            .register("sw.js")
-            .catch(function() {});
-
-    });
-
-}
 
 </script>
-
 
 </body>
 
